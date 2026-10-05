@@ -1,14 +1,14 @@
 <!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="inema-course" content="jarvis">
 
-  <!-- 1) ANTI-FOUC — script BLOQUEANTE, PRIMEIRO, antes do Tailwind e do learn.css.
+<html class="dark" lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="jarvis" name="inema-course"/>
+<!-- 1) ANTI-FOUC — script BLOQUEANTE, PRIMEIRO, antes do Tailwind e do learn.css.
         Le inema.prefs (global) e aplica .dark + data-theme + vars de leitura ANTES do 1o paint.
         try/catch total => default dark (preserva a marca INEMA). REL = "." (raiz com assets/). -->
-  <script>
+<script>
   (function () {
     try {
       var html = document.documentElement;
@@ -57,9 +57,8 @@
     }
   })();
   </script>
-
-  <!-- 2) Manifesto do curso (estrutura COMPLETA — identico em TODAS as paginas) -->
-  <script type="application/json" data-inema-manifest>
+<!-- 2) Manifesto do curso (estrutura COMPLETA — identico em TODAS as paginas) -->
+<script data-inema-manifest="" type="application/json">
   {
     "course": "jarvis",
     "tracks": [
@@ -90,22 +89,18 @@
     ]
   }
   </script>
-
-  <title>Arquitetura de Intenção da IA — Método JARVIS | INEMA.CLUB</title>
-
-  <!-- 3) Tailwind + config -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
+<title>Arquitetura de Intenção da IA — Método JARVIS | INEMA.CLUB</title>
+<!-- 3) Tailwind + config -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
     tailwind.config = { darkMode: 'class', theme: { extend: { colors: {
       primary: '#FACC15', dark: { 900: '#111827', 800: '#1f2937', 700: '#374151', 600: '#4b5563' } } } } }
   </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <!-- 4) learn.css (camada de aprendizagem) -->
-  <link rel="stylesheet" href="./assets/learn.css">
-
-  <!-- 5) CSS base v1 + light mode (todas as trilhas) -->
-  <style>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- 4) learn.css (camada de aprendizagem) -->
+<link href="./assets/learn.css" rel="stylesheet"/>
+<!-- 5) CSS base v1 + light mode (todas as trilhas) -->
+<style>
     body { font-family: 'Inter', sans-serif; }
     .dark body { background-color: #111827; }
     .topic-explanation { display: none; }
@@ -177,272 +172,247 @@
     /* Painel de aparencia ancorado ao gatilho */
     .appearance-anchor { position: relative; }
   </style>
-</head>
-<body class="bg-dark-900 text-neutral-100 min-h-screen">
-
-  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
-
-  <!-- ===================== NAV COMPLETO ===================== -->
-  <nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-14">
-        <div class="flex items-center space-x-4">
-          <a href="./index.html" class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300">
-            <span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Arquitetura de Intenção</span>
-          </a>
-          <span class="text-neutral-600">|</span>
-          <a href="https://inema.club" target="_blank" class="text-sky-400 hover:text-sky-300 text-sm font-medium">INEMA.CLUB</a>
-        </div>
-        <div class="flex items-center space-x-1 sm:space-x-2">
-          <a href="curso/trilha1/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors">
-            <span class="sm:hidden">D1</span><span class="hidden sm:inline">Dia 1</span></a>
-          <a href="curso/trilha2/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors">
-            <span class="sm:hidden">D2</span><span class="hidden sm:inline">Dia 2</span></a>
-          <a href="curso/trilha3/index.html" class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors">
-            <span class="sm:hidden">D3</span><span class="hidden sm:inline">Dia 3</span></a>
-
-          <!-- Minha jornada -->
-          <button type="button" data-inema-journey-open title="Minha jornada"
-                  class="ml-1 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-medium text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors">
-            <span aria-hidden="true">◷</span><span class="hidden sm:inline">Jornada</span>
-            <span class="inema-journey-badge hidden" data-inema-journey-badge data-count="0"></span>
-          </button>
-
-          <!-- Aparencia -->
-          <div class="appearance-anchor">
-            <button type="button" data-inema-appearance-toggle="[data-inema-appearance]" aria-expanded="false" title="Aparência e leitura"
-                    class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors text-neutral-300">
-              <span aria-hidden="true">◑</span>
-            </button>
-            <div data-inema-appearance class="inema-appearance-pop">
-              <div class="inema-segment" role="group" aria-label="Tema">
-                <button type="button" data-inema-set-theme="inema-dark">Escuro</button>
-                <button type="button" data-inema-set-theme="claro">Claro</button>
-                <button type="button" data-inema-set-theme="sepia">Sépia</button>
-                <button type="button" data-inema-set-theme="foco">Foco</button>
-                <button type="button" data-inema-set-theme="contraste">Alto contraste</button>
-              </div>
-              <div class="inema-segment" role="group" aria-label="Fonte">
-                <button type="button" data-inema-set-font="inter">Inter</button>
-                <button type="button" data-inema-set-font="system">Sistema</button>
-                <button type="button" data-inema-set-font="leitura">Leitura</button>
-              </div>
-              <div class="inema-segment" role="group" aria-label="Tamanho do texto">
-                <button type="button" data-inema-set-fontscale="100">A</button>
-                <button type="button" data-inema-set-fontscale="112">A+</button>
-                <button type="button" data-inema-set-fontscale="125">A++</button>
-              </div>
-              <div class="inema-segment" role="group" aria-label="Largura da linha">
-                <button type="button" data-inema-set-linewidth="60">Estreito</button>
-                <button type="button" data-inema-set-linewidth="68">Médio</button>
-                <button type="button" data-inema-set-linewidth="75">Largo</button>
-              </div>
-              <div class="inema-segment" role="group" aria-label="Entrelinha">
-                <button type="button" data-inema-set-leading="1.45">Compacto</button>
-                <button type="button" data-inema-set-leading="1.7">Confortável</button>
-              </div>
-              <div class="inema-accent-grid" role="group" aria-label="Cor de acento">
-                <button type="button" data-inema-set-accent="emerald" title="Esmeralda"></button>
-                <button type="button" data-inema-set-accent="blue" title="Azul"></button>
-                <button type="button" data-inema-set-accent="purple" title="Roxo"></button>
-                <button type="button" data-inema-set-accent="amber" title="Âmbar"></button>
-                <button type="button" data-inema-set-accent="teal" title="Teal"></button>
-                <button type="button" data-inema-set-accent="rose" title="Rosa"></button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <main id="conteudo">
-
-    <!-- ===================== HERO ===================== -->
-    <header class="relative overflow-hidden bg-gradient-to-br from-emerald-900/20 via-dark-900 to-dark-900 border-b border-dark-600">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
-        <span class="inline-block px-3 py-1 bg-primary/10 border border-primary/40 text-primary text-xs font-semibold rounded-full mb-5 tracking-wide">MÉTODO JARVIS · CURSO PRESENCIAL DE 3 DIAS</span>
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-5 leading-[1.05] tracking-tight">Arquitetura de Intenção da IA</h1>
-        <p class="text-lg sm:text-xl text-neutral-300 max-w-3xl mb-4 leading-relaxed">Pare de pedir melhor para a IA. Aprenda a <strong class="text-primary">construir o sistema</strong> onde ela trabalha com propósito.</p>
-        <p class="text-base text-neutral-400 max-w-3xl mb-8 leading-relaxed">Em três dias você deixa de operar prompts e passa a desenhar soluções de IA para problemas reais da empresa — com identidade, canais, agentes, ferramentas, segurança e medição. Não para virar programador: para virar <strong class="text-neutral-200">arquiteto de soluções</strong>.</p>
-
-        <div class="flex flex-wrap items-center gap-3 mb-6">
-          <a href="curso/trilha1/index.html" class="inline-flex items-center gap-2 px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-semibold transition-colors">Começar pelo Dia 1 <span aria-hidden="true">→</span></a>
-          <a href="#estrutura" class="inline-flex items-center gap-2 px-5 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-200 rounded-lg font-semibold transition-colors">Ver a estrutura</a>
-        </div>
-        <p class="text-xs text-neutral-500 mb-8">Sem cadastro · abre direto no navegador · seu progresso, dúvidas e anotações ficam só no seu dispositivo.</p>
-
-        <!-- CAPA do curso -->
-        <div class="rounded-2xl border border-primary/30 bg-dark-900/40 p-1.5 sm:p-2 mb-8 overflow-hidden">
-          <img src="assets/img/capa.png" width="1672" height="941" loading="eager"
-               alt="Arquitetura de Intenção — o próximo passo da IA: a evolução de Coding para Vibe Coding, Agentic Engineering e, por fim, a Arquitetura de Intenção"
-               class="w-full h-auto rounded-xl" />
-        </div>
-
-        <!-- Medidor de progresso do curso -->
-        <div data-inema-meter="curso" class="inema-bar-wrap" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso do curso" style="max-width:520px">
-          <div class="flex items-center justify-between text-sm text-neutral-400 mb-2">
-            <span>Seu percurso</span>
-            <span><strong class="text-neutral-200" data-inema-meter-frac>0 de 111</strong> seções · <span data-inema-meter-pct>0%</span></span>
-          </div>
-          <div class="inema-bar"><div class="inema-bar__fill" data-inema-meter-fill></div></div>
-          <button type="button" data-inema-journey-open class="mt-3 text-sm text-emerald-400 hover:text-emerald-300 underline underline-offset-2">continuar de onde parei →</button>
-        </div>
-      </div>
-    </header>
-
-    <!-- ===================== A VIRADA ===================== -->
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-b border-dark-600">
-      <span class="text-sm font-semibold text-emerald-400 tracking-wide uppercase">A virada</span>
-      <h2 class="text-2xl sm:text-3xl font-bold mt-2 mb-6">De operador de prompt a arquiteto de intenção</h2>
-      <div class="grid md:grid-cols-2 gap-6 items-start">
-        <div class="space-y-4 text-neutral-300 leading-relaxed">
-          <p>Este curso não é sobre "aprender IA" nem sobre "programar". É sobre formar pessoas capazes de <strong class="text-neutral-100">construir soluções com IA dentro das empresas</strong>.</p>
-          <p>A pessoa deixa de perguntar <em class="text-neutral-400">"que prompt eu uso?"</em> e começa a perguntar <strong class="text-emerald-400">"que sistema eu preciso construir para resolver esse problema?"</strong></p>
-          <p>Antes de criar agentes, prompts ou automações, você constrói a infraestrutura mental, técnica e estratégica onde a IA vai operar. Uma solução de IA não é um chatbot — é um <strong class="text-neutral-100">sistema vivo</strong>, com intenção, identidade, canais, serviços, segurança e evolução.</p>
-        </div>
-        <div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
-          <h3 class="font-semibold text-neutral-200 mb-4">Sem arquitetura, a IA vira ruído</h3>
-          <ul class="space-y-3 text-sm text-neutral-300">
-            <li class="flex gap-3"><span class="text-red-400 flex-shrink-0">✗</span><span>IA sem intenção clara vira <strong>tentativa</strong>.</span></li>
-            <li class="flex gap-3"><span class="text-red-400 flex-shrink-0">✗</span><span>IA sem contexto vira <strong>chute</strong>.</span></li>
-            <li class="flex gap-3"><span class="text-red-400 flex-shrink-0">✗</span><span>IA sem regra vira <strong>risco</strong>.</span></li>
-            <li class="flex gap-3"><span class="text-red-400 flex-shrink-0">✗</span><span>IA sem canal vira <strong>ferramenta isolada</strong>.</span></li>
-            <li class="flex gap-3"><span class="text-red-400 flex-shrink-0">✗</span><span>IA sem medição vira <strong>ilusão de produtividade</strong>.</span></li>
-          </ul>
-          <p class="mt-4 text-sm text-neutral-400">Com arquitetura, ela vira <strong class="text-emerald-400">infraestrutura de solução</strong>.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== O METODO JARVIS (acrônimo) ===================== -->
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-b border-dark-600">
-      <span class="text-sm font-semibold text-primary tracking-wide uppercase">O método</span>
-      <h2 class="text-2xl sm:text-3xl font-bold mt-2 mb-3">J.A.R.V.I.S — seis pilares de uma solução viva</h2>
-      <p class="text-neutral-400 max-w-3xl mb-8">A metáfora do Jarvis: não um chatbot, mas uma entidade operacional com alma, regras, canais, serviços, agentes, ferramentas e — acima de tudo — uma intenção.</p>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5"><div class="flex items-center gap-3 mb-2"><span class="w-9 h-9 rounded-full bg-primary/10 border border-primary/40 text-primary font-bold flex items-center justify-center">J</span><h3 class="font-semibold">Jornada da intenção</h3></div><p class="text-sm text-neutral-400">Toda solução começa por clareza: que problema, para quem, qual resultado importa.</p></div>
-        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5"><div class="flex items-center gap-3 mb-2"><span class="w-9 h-9 rounded-full bg-primary/10 border border-primary/40 text-primary font-bold flex items-center justify-center">A</span><h3 class="font-semibold">Arquitetura do sistema</h3></div><p class="text-sm text-neutral-400">Canais, serviços, agentes e habilidades organizados em torno do propósito.</p></div>
-        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5"><div class="flex items-center gap-3 mb-2"><span class="w-9 h-9 rounded-full bg-primary/10 border border-primary/40 text-primary font-bold flex items-center justify-center">R</span><h3 class="font-semibold">Regras e responsabilidades</h3></div><p class="text-sm text-neutral-400">Limites, permissões e muros de segurança: o que o sistema pode e não pode.</p></div>
-        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5"><div class="flex items-center gap-3 mb-2"><span class="w-9 h-9 rounded-full bg-primary/10 border border-primary/40 text-primary font-bold flex items-center justify-center">V</span><h3 class="font-semibold">Validação de resultados</h3></div><p class="text-sm text-neutral-400">Medir o que importa — senão qualquer entrega parece progresso.</p></div>
-        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5"><div class="flex items-center gap-3 mb-2"><span class="w-9 h-9 rounded-full bg-primary/10 border border-primary/40 text-primary font-bold flex items-center justify-center">I</span><h3 class="font-semibold">Integração com ferramentas</h3></div><p class="text-sm text-neutral-400">Conectar o sistema ao mundo real: planilhas, CRM, APIs, mensageria.</p></div>
-        <div class="bg-dark-800 rounded-xl border border-dark-600 p-5"><div class="flex items-center gap-3 mb-2"><span class="w-9 h-9 rounded-full bg-primary/10 border border-primary/40 text-primary font-bold flex items-center justify-center">S</span><h3 class="font-semibold">Solução em evolução</h3></div><p class="text-sm text-neutral-400">O sistema aprende, se adapta e melhora com o tempo.</p></div>
-      </div>
-    </section>
-
-    <!-- ===================== ESTRUTURA / 3 DIAS ===================== -->
-    <section id="estrutura" class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-b border-dark-600">
-      <span class="text-sm font-semibold text-neutral-400 tracking-wide uppercase">A estrutura · 3 dias · 18 módulos · 111 seções</span>
-      <h2 class="text-2xl sm:text-3xl font-bold mt-2 mb-8">O percurso completo</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-        <!-- Dia 1 -->
-        <a href="curso/trilha1/index.html" class="group bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-2xl border border-emerald-500/30 p-6 transition-all hover:border-emerald-500/60">
-          <div class="flex items-center justify-between mb-3">
-            <span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full">DIA 1</span>
-            <span class="text-xs text-neutral-500">5 módulos · 32 seções</span>
-          </div>
-          <h3 class="text-xl font-bold mb-2 group-hover:text-emerald-400 transition-colors">🧱 Infraestrutura e Mentalidade</h3>
-          <p class="text-sm text-neutral-400 mb-4">A virada de mentalidade e o mapa do terreno: pastas, terminal, versionamento, publicação e os canais por onde o sistema fala com o mundo.</p>
-          <ul class="space-y-1.5 text-sm text-neutral-300">
-            <li class="flex gap-2"><span class="text-emerald-400">·</span>A Virada: de operador a arquiteto</li>
-            <li class="flex gap-2"><span class="text-emerald-400">·</span>A metáfora do Jarvis</li>
-            <li class="flex gap-2"><span class="text-emerald-400">·</span>Pastas, terminal e versionamento</li>
-            <li class="flex gap-2"><span class="text-emerald-400">·</span>Publicar no mundo (hospedagem, VPS, deploy)</li>
-            <li class="flex gap-2"><span class="text-emerald-400">·</span>Canais de entrada e saída</li>
-          </ul>
-          <span class="inline-flex items-center gap-1 mt-5 text-emerald-400 font-semibold text-sm group-hover:gap-2 transition-all">Abrir o Dia 1 <span aria-hidden="true">→</span></span>
-        </a>
-
-        <!-- Dia 2 -->
-        <a href="curso/trilha2/index.html" class="group bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-2xl border border-blue-500/30 p-6 transition-all hover:border-blue-500/60">
-          <div class="flex items-center justify-between mb-3">
-            <span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full">DIA 2</span>
-            <span class="text-xs text-neutral-500">7 módulos · 43 seções</span>
-          </div>
-          <h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">🤖 Construção do Jarvis</h3>
-          <p class="text-sm text-neutral-400 mb-4">A construção da "alma": identidade, regras, serviços, agentes, habilidades, memória, muros de segurança e ferramentas.</p>
-          <ul class="space-y-1.5 text-sm text-neutral-300">
-            <li class="flex gap-2"><span class="text-blue-400">·</span>A alma do Jarvis (identidade e limites)</li>
-            <li class="flex gap-2"><span class="text-blue-400">·</span>Serviços internos e agentes</li>
-            <li class="flex gap-2"><span class="text-blue-400">·</span>Habilidades e memória</li>
-            <li class="flex gap-2"><span class="text-blue-400">·</span>Muros de segurança</li>
-            <li class="flex gap-2"><span class="text-blue-400">·</span>Ferramentas e integrações</li>
-          </ul>
-          <span class="inline-flex items-center gap-1 mt-5 text-blue-400 font-semibold text-sm group-hover:gap-2 transition-all">Abrir o Dia 2 <span aria-hidden="true">→</span></span>
-        </a>
-
-        <!-- Dia 3 -->
-        <a href="curso/trilha3/index.html" class="group bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-2xl border border-purple-500/30 p-6 transition-all hover:border-purple-500/60">
-          <div class="flex items-center justify-between mb-3">
-            <span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full">DIA 3</span>
-            <span class="text-xs text-neutral-500">6 módulos · 36 seções</span>
-          </div>
-          <h3 class="text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors">🎯 Solução Real na Empresa</h3>
-          <p class="text-sm text-neutral-400 mb-4">Do conceito ao protótipo: escolher um problema, definir a intenção, montar o fluxo, medir o resultado e apresentar a solução.</p>
-          <ul class="space-y-1.5 text-sm text-neutral-300">
-            <li class="flex gap-2"><span class="text-purple-400">·</span>A intenção no centro</li>
-            <li class="flex gap-2"><span class="text-purple-400">·</span>Mapear o problema na empresa</li>
-            <li class="flex gap-2"><span class="text-purple-400">·</span>Desenhar a arquitetura da solução</li>
-            <li class="flex gap-2"><span class="text-purple-400">·</span>Protótipo funcional e medição</li>
-            <li class="flex gap-2"><span class="text-purple-400">·</span>Evolução e apresentação</li>
-          </ul>
-          <span class="inline-flex items-center gap-1 mt-5 text-purple-400 font-semibold text-sm group-hover:gap-2 transition-all">Abrir o Dia 3 <span aria-hidden="true">→</span></span>
-        </a>
-
-      </div>
-    </section>
-
-    <!-- ===================== PARA QUEM / O QUE SAI SABENDO ===================== -->
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-b border-dark-600">
-      <div class="grid md:grid-cols-2 gap-8">
-        <div>
-          <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span>🧭</span> Para quem é</h2>
-          <p class="text-neutral-400 mb-4 text-sm leading-relaxed">Pessoas comuns dentro das empresas que querem construir soluções com IA — sem virar programadores tradicionais nem competir com engenheiros de software.</p>
-          <p class="text-neutral-300 text-sm leading-relaxed">O arquiteto de intenção olha para uma empresa e pergunta: onde há repetição? Onde se perde tempo? Onde a informação está desorganizada? Onde a decisão é lenta? <strong class="text-neutral-100">Onde a IA pode multiplicar resultado?</strong></p>
-        </div>
-        <div>
-          <h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span>✅</span> O que você sai sabendo fazer</h2>
-          <ul class="grid sm:grid-cols-2 gap-2.5 text-sm text-neutral-300">
-            <li class="flex gap-2"><span class="text-emerald-400">✓</span>Entender um problema real</li>
-            <li class="flex gap-2"><span class="text-emerald-400">✓</span>Mapear uma intenção</li>
-            <li class="flex gap-2"><span class="text-emerald-400">✓</span>Estruturar contexto</li>
-            <li class="flex gap-2"><span class="text-emerald-400">✓</span>Criar a alma de um Jarvis</li>
-            <li class="flex gap-2"><span class="text-emerald-400">✓</span>Definir canais de I/O</li>
-            <li class="flex gap-2"><span class="text-emerald-400">✓</span>Organizar agentes e serviços</li>
-            <li class="flex gap-2"><span class="text-emerald-400">✓</span>Escolher ferramentas</li>
-            <li class="flex gap-2"><span class="text-emerald-400">✓</span>Criar regras de segurança</li>
-            <li class="flex gap-2"><span class="text-emerald-400">✓</span>Medir resultado</li>
-            <li class="flex gap-2"><span class="text-emerald-400">✓</span>Melhorar continuamente</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===================== PROMESSA / FECHO ===================== -->
-    <section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-      <div class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 rounded-2xl border border-emerald-500/30 p-8 sm:p-10 text-center">
-        <h2 class="text-2xl sm:text-3xl font-bold mb-4">O futuro não pertence a quem sabe pedir melhor.</h2>
-        <p class="text-lg text-neutral-300 mb-2">Pertence a quem sabe <strong class="text-emerald-400">estruturar melhor</strong>.</p>
-        <p class="text-neutral-400 max-w-2xl mx-auto mb-8 text-sm">Prompt não basta. Ferramenta não basta. Agente não basta. O que faz a diferença é a arquitetura — e no centro da arquitetura está a intenção.</p>
-        <div class="flex flex-wrap justify-center gap-3">
-          <a href="curso/trilha1/index.html" class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-semibold transition-colors">Começar agora pelo Dia 1 <span aria-hidden="true">→</span></a>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="border-t border-dark-600 py-8">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
-      <p><strong class="text-neutral-300">Arquitetura de Intenção da IA</strong> — Método JARVIS · curso presencial de 3 dias</p>
-      <p class="mt-1">INEMA.CLUB · 2026 · seu progresso fica salvo só neste navegador</p>
-    </div>
-  </footer>
-
-  <!-- learn.js + init -->
-  <script src="./assets/learn.js"></script>
-  <script>
+<link href="https://inematds.github.io/arquitetura-de-intencao-da-ia/" hreflang="pt-BR" rel="alternate"/><link href="https://inematds.github.io/arquitetura-de-intencao-da-ia/en/" hreflang="en" rel="alternate"/><link href="https://inematds.github.io/arquitetura-de-intencao-da-ia/es/" hreflang="es" rel="alternate"/></head>
+<body class="bg-dark-900 text-neutral-100 min-h-screen"><div class="inema-lang" style="position:fixed;right:14px;bottom:14px;z-index:9999;display:flex;gap:2px;padding:4px;border-radius:10px;background:rgba(12,12,16,.82);border:1px solid rgba(226,162,59,.45);font:600 12px/1 Sora,Inter,system-ui,sans-serif;backdrop-filter:blur(8px)" translate="no"><a href="./" hreflang="pt-BR" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#1a1206;background:#E2A23B">PT</a><a href="en/" hreflang="en" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">EN</a><a href="es/" hreflang="es" style="padding:6px 8px;border-radius:7px;text-decoration:none;color:#e9e9ee">ES</a></div>
+<a class="skip" href="#conteudo">Pular para o conteúdo</a>
+<!-- ===================== NAV COMPLETO ===================== -->
+<nav class="sticky top-0 z-50 bg-dark-900/95 backdrop-blur-sm border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex justify-between items-center h-14">
+<div class="flex items-center space-x-4">
+<a class="flex items-center space-x-2 text-yellow-400 hover:text-yellow-300" href="./index.html">
+<span class="text-2xl">🧠</span><span class="font-bold text-lg hidden sm:inline">Arquitetura de Intenção</span>
+</a>
+<span class="text-neutral-600">|</span>
+<a class="text-sky-400 hover:text-sky-300 text-sm font-medium" href="https://inema.club" target="_blank">INEMA.CLUB</a>
+</div>
+<div class="flex items-center space-x-1 sm:space-x-2">
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-emerald-400 hover:bg-emerald-500/10 transition-colors" href="curso/trilha1/index.html">
+<span class="sm:hidden">D1</span><span class="hidden sm:inline">Dia 1</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-blue-400 hover:bg-blue-500/10 transition-colors" href="curso/trilha2/index.html">
+<span class="sm:hidden">D2</span><span class="hidden sm:inline">Dia 2</span></a>
+<a class="px-3 py-1.5 rounded-lg text-sm font-semibold text-neutral-400 hover:text-purple-400 hover:bg-purple-500/10 transition-colors" href="curso/trilha3/index.html">
+<span class="sm:hidden">D3</span><span class="hidden sm:inline">Dia 3</span></a>
+<!-- Minha jornada -->
+<button class="ml-1 inline-flex items-center gap-1 px-3 py-1.5 rounded-lg text-sm font-medium text-neutral-300 hover:text-neutral-100 hover:bg-dark-700 transition-colors" data-inema-journey-open="" title="Minha jornada" type="button">
+<span aria-hidden="true">◷</span><span class="hidden sm:inline">Jornada</span>
+<span class="inema-journey-badge hidden" data-count="0" data-inema-journey-badge=""></span>
+</button>
+<!-- Aparencia -->
+<div class="appearance-anchor">
+<button aria-expanded="false" class="p-2 rounded-lg bg-dark-700 hover:bg-dark-600 transition-colors text-neutral-300" data-inema-appearance-toggle="[data-inema-appearance]" title="Aparência e leitura" type="button">
+<span aria-hidden="true">◑</span>
+</button>
+<div class="inema-appearance-pop" data-inema-appearance="">
+<div aria-label="Tema" class="inema-segment" role="group">
+<button data-inema-set-theme="inema-dark" type="button">Escuro</button>
+<button data-inema-set-theme="claro" type="button">Claro</button>
+<button data-inema-set-theme="sepia" type="button">Sépia</button>
+<button data-inema-set-theme="foco" type="button">Foco</button>
+<button data-inema-set-theme="contraste" type="button">Alto contraste</button>
+</div>
+<div aria-label="Fonte" class="inema-segment" role="group">
+<button data-inema-set-font="inter" type="button">Inter</button>
+<button data-inema-set-font="system" type="button">Sistema</button>
+<button data-inema-set-font="leitura" type="button">Leitura</button>
+</div>
+<div aria-label="Tamanho do texto" class="inema-segment" role="group">
+<button data-inema-set-fontscale="100" type="button">A</button>
+<button data-inema-set-fontscale="112" type="button">A+</button>
+<button data-inema-set-fontscale="125" type="button">A++</button>
+</div>
+<div aria-label="Largura da linha" class="inema-segment" role="group">
+<button data-inema-set-linewidth="60" type="button">Estreito</button>
+<button data-inema-set-linewidth="68" type="button">Médio</button>
+<button data-inema-set-linewidth="75" type="button">Largo</button>
+</div>
+<div aria-label="Entrelinha" class="inema-segment" role="group">
+<button data-inema-set-leading="1.45" type="button">Compacto</button>
+<button data-inema-set-leading="1.7" type="button">Confortável</button>
+</div>
+<div aria-label="Cor de acento" class="inema-accent-grid" role="group">
+<button data-inema-set-accent="emerald" title="Esmeralda" type="button"></button>
+<button data-inema-set-accent="blue" title="Azul" type="button"></button>
+<button data-inema-set-accent="purple" title="Roxo" type="button"></button>
+<button data-inema-set-accent="amber" title="Âmbar" type="button"></button>
+<button data-inema-set-accent="teal" title="Teal" type="button"></button>
+<button data-inema-set-accent="rose" title="Rosa" type="button"></button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</nav>
+<main id="conteudo">
+<!-- ===================== HERO ===================== -->
+<header class="relative overflow-hidden bg-gradient-to-br from-emerald-900/20 via-dark-900 to-dark-900 border-b border-dark-600">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+<span class="inline-block px-3 py-1 bg-primary/10 border border-primary/40 text-primary text-xs font-semibold rounded-full mb-5 tracking-wide">MÉTODO JARVIS · CURSO PRESENCIAL DE 3 DIAS</span>
+<h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-5 leading-[1.05] tracking-tight">Arquitetura de Intenção da IA</h1>
+<p class="text-lg sm:text-xl text-neutral-300 max-w-3xl mb-4 leading-relaxed">Pare de pedir melhor para a IA. Aprenda a <strong class="text-primary">construir o sistema</strong> onde ela trabalha com propósito.</p>
+<p class="text-base text-neutral-400 max-w-3xl mb-8 leading-relaxed">Em três dias você deixa de operar prompts e passa a desenhar soluções de IA para problemas reais da empresa — com identidade, canais, agentes, ferramentas, segurança e medição. Não para virar programador: para virar <strong class="text-neutral-200">arquiteto de soluções</strong>.</p>
+<div class="flex flex-wrap items-center gap-3 mb-6">
+<a class="inline-flex items-center gap-2 px-5 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-semibold transition-colors" href="curso/trilha1/index.html">Começar pelo Dia 1 <span aria-hidden="true">→</span></a>
+<a class="inline-flex items-center gap-2 px-5 py-3 bg-dark-700 hover:bg-dark-600 text-neutral-200 rounded-lg font-semibold transition-colors" href="#estrutura">Ver a estrutura</a>
+</div>
+<p class="text-xs text-neutral-500 mb-8">Sem cadastro · abre direto no navegador · seu progresso, dúvidas e anotações ficam só no seu dispositivo.</p>
+<!-- CAPA do curso -->
+<div class="rounded-2xl border border-primary/30 bg-dark-900/40 p-1.5 sm:p-2 mb-8 overflow-hidden">
+<img alt="Arquitetura de Intenção — o próximo passo da IA: a evolução de Coding para Vibe Coding, Agentic Engineering e, por fim, a Arquitetura de Intenção" class="w-full h-auto rounded-xl" height="941" loading="eager" src="assets/img/capa.png" width="1672"/>
+</div>
+<!-- Medidor de progresso do curso -->
+<div aria-label="Progresso do curso" aria-valuemax="100" aria-valuemin="0" class="inema-bar-wrap" data-inema-meter="curso" role="progressbar" style="max-width:520px">
+<div class="flex items-center justify-between text-sm text-neutral-400 mb-2">
+<span>Seu percurso</span>
+<span><strong class="text-neutral-200" data-inema-meter-frac="">0 de 111</strong> seções · <span data-inema-meter-pct="">0%</span></span>
+</div>
+<div class="inema-bar"><div class="inema-bar__fill" data-inema-meter-fill=""></div></div>
+<button class="mt-3 text-sm text-emerald-400 hover:text-emerald-300 underline underline-offset-2" data-inema-journey-open="" type="button">continuar de onde parei →</button>
+</div>
+</div>
+</header>
+<!-- ===================== A VIRADA ===================== -->
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-b border-dark-600">
+<span class="text-sm font-semibold text-emerald-400 tracking-wide uppercase">A virada</span>
+<h2 class="text-2xl sm:text-3xl font-bold mt-2 mb-6">De operador de prompt a arquiteto de intenção</h2>
+<div class="grid md:grid-cols-2 gap-6 items-start">
+<div class="space-y-4 text-neutral-300 leading-relaxed">
+<p>Este curso não é sobre "aprender IA" nem sobre "programar". É sobre formar pessoas capazes de <strong class="text-neutral-100">construir soluções com IA dentro das empresas</strong>.</p>
+<p>A pessoa deixa de perguntar <em class="text-neutral-400">"que prompt eu uso?"</em> e começa a perguntar <strong class="text-emerald-400">"que sistema eu preciso construir para resolver esse problema?"</strong></p>
+<p>Antes de criar agentes, prompts ou automações, você constrói a infraestrutura mental, técnica e estratégica onde a IA vai operar. Uma solução de IA não é um chatbot — é um <strong class="text-neutral-100">sistema vivo</strong>, com intenção, identidade, canais, serviços, segurança e evolução.</p>
+</div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-6">
+<h3 class="font-semibold text-neutral-200 mb-4">Sem arquitetura, a IA vira ruído</h3>
+<ul class="space-y-3 text-sm text-neutral-300">
+<li class="flex gap-3"><span class="text-red-400 flex-shrink-0">✗</span><span>IA sem intenção clara vira <strong>tentativa</strong>.</span></li>
+<li class="flex gap-3"><span class="text-red-400 flex-shrink-0">✗</span><span>IA sem contexto vira <strong>chute</strong>.</span></li>
+<li class="flex gap-3"><span class="text-red-400 flex-shrink-0">✗</span><span>IA sem regra vira <strong>risco</strong>.</span></li>
+<li class="flex gap-3"><span class="text-red-400 flex-shrink-0">✗</span><span>IA sem canal vira <strong>ferramenta isolada</strong>.</span></li>
+<li class="flex gap-3"><span class="text-red-400 flex-shrink-0">✗</span><span>IA sem medição vira <strong>ilusão de produtividade</strong>.</span></li>
+</ul>
+<p class="mt-4 text-sm text-neutral-400">Com arquitetura, ela vira <strong class="text-emerald-400">infraestrutura de solução</strong>.</p>
+</div>
+</div>
+</section>
+<!-- ===================== O METODO JARVIS (acrônimo) ===================== -->
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-b border-dark-600">
+<span class="text-sm font-semibold text-primary tracking-wide uppercase">O método</span>
+<h2 class="text-2xl sm:text-3xl font-bold mt-2 mb-3">J.A.R.V.I.S — seis pilares de uma solução viva</h2>
+<p class="text-neutral-400 max-w-3xl mb-8">A metáfora do Jarvis: não um chatbot, mas uma entidade operacional com alma, regras, canais, serviços, agentes, ferramentas e — acima de tudo — uma intenção.</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5"><div class="flex items-center gap-3 mb-2"><span class="w-9 h-9 rounded-full bg-primary/10 border border-primary/40 text-primary font-bold flex items-center justify-center">J</span><h3 class="font-semibold">Jornada da intenção</h3></div><p class="text-sm text-neutral-400">Toda solução começa por clareza: que problema, para quem, qual resultado importa.</p></div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5"><div class="flex items-center gap-3 mb-2"><span class="w-9 h-9 rounded-full bg-primary/10 border border-primary/40 text-primary font-bold flex items-center justify-center">A</span><h3 class="font-semibold">Arquitetura do sistema</h3></div><p class="text-sm text-neutral-400">Canais, serviços, agentes e habilidades organizados em torno do propósito.</p></div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5"><div class="flex items-center gap-3 mb-2"><span class="w-9 h-9 rounded-full bg-primary/10 border border-primary/40 text-primary font-bold flex items-center justify-center">R</span><h3 class="font-semibold">Regras e responsabilidades</h3></div><p class="text-sm text-neutral-400">Limites, permissões e muros de segurança: o que o sistema pode e não pode.</p></div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5"><div class="flex items-center gap-3 mb-2"><span class="w-9 h-9 rounded-full bg-primary/10 border border-primary/40 text-primary font-bold flex items-center justify-center">V</span><h3 class="font-semibold">Validação de resultados</h3></div><p class="text-sm text-neutral-400">Medir o que importa — senão qualquer entrega parece progresso.</p></div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5"><div class="flex items-center gap-3 mb-2"><span class="w-9 h-9 rounded-full bg-primary/10 border border-primary/40 text-primary font-bold flex items-center justify-center">I</span><h3 class="font-semibold">Integração com ferramentas</h3></div><p class="text-sm text-neutral-400">Conectar o sistema ao mundo real: planilhas, CRM, APIs, mensageria.</p></div>
+<div class="bg-dark-800 rounded-xl border border-dark-600 p-5"><div class="flex items-center gap-3 mb-2"><span class="w-9 h-9 rounded-full bg-primary/10 border border-primary/40 text-primary font-bold flex items-center justify-center">S</span><h3 class="font-semibold">Solução em evolução</h3></div><p class="text-sm text-neutral-400">O sistema aprende, se adapta e melhora com o tempo.</p></div>
+</div>
+</section>
+<!-- ===================== ESTRUTURA / 3 DIAS ===================== -->
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-b border-dark-600" id="estrutura">
+<span class="text-sm font-semibold text-neutral-400 tracking-wide uppercase">A estrutura · 3 dias · 18 módulos · 111 seções</span>
+<h2 class="text-2xl sm:text-3xl font-bold mt-2 mb-8">O percurso completo</h2>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+<!-- Dia 1 -->
+<a class="group bg-gradient-to-br from-emerald-900/30 to-dark-800 rounded-2xl border border-emerald-500/30 p-6 transition-all hover:border-emerald-500/60" href="curso/trilha1/index.html">
+<div class="flex items-center justify-between mb-3">
+<span class="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 text-xs font-semibold rounded-full">DIA 1</span>
+<span class="text-xs text-neutral-500">5 módulos · 32 seções</span>
+</div>
+<h3 class="text-xl font-bold mb-2 group-hover:text-emerald-400 transition-colors">🧱 Infraestrutura e Mentalidade</h3>
+<p class="text-sm text-neutral-400 mb-4">A virada de mentalidade e o mapa do terreno: pastas, terminal, versionamento, publicação e os canais por onde o sistema fala com o mundo.</p>
+<ul class="space-y-1.5 text-sm text-neutral-300">
+<li class="flex gap-2"><span class="text-emerald-400">·</span>A Virada: de operador a arquiteto</li>
+<li class="flex gap-2"><span class="text-emerald-400">·</span>A metáfora do Jarvis</li>
+<li class="flex gap-2"><span class="text-emerald-400">·</span>Pastas, terminal e versionamento</li>
+<li class="flex gap-2"><span class="text-emerald-400">·</span>Publicar no mundo (hospedagem, VPS, deploy)</li>
+<li class="flex gap-2"><span class="text-emerald-400">·</span>Canais de entrada e saída</li>
+</ul>
+<span class="inline-flex items-center gap-1 mt-5 text-emerald-400 font-semibold text-sm group-hover:gap-2 transition-all">Abrir o Dia 1 <span aria-hidden="true">→</span></span>
+</a>
+<!-- Dia 2 -->
+<a class="group bg-gradient-to-br from-blue-900/30 to-dark-800 rounded-2xl border border-blue-500/30 p-6 transition-all hover:border-blue-500/60" href="curso/trilha2/index.html">
+<div class="flex items-center justify-between mb-3">
+<span class="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 text-xs font-semibold rounded-full">DIA 2</span>
+<span class="text-xs text-neutral-500">7 módulos · 43 seções</span>
+</div>
+<h3 class="text-xl font-bold mb-2 group-hover:text-blue-400 transition-colors">🤖 Construção do Jarvis</h3>
+<p class="text-sm text-neutral-400 mb-4">A construção da "alma": identidade, regras, serviços, agentes, habilidades, memória, muros de segurança e ferramentas.</p>
+<ul class="space-y-1.5 text-sm text-neutral-300">
+<li class="flex gap-2"><span class="text-blue-400">·</span>A alma do Jarvis (identidade e limites)</li>
+<li class="flex gap-2"><span class="text-blue-400">·</span>Serviços internos e agentes</li>
+<li class="flex gap-2"><span class="text-blue-400">·</span>Habilidades e memória</li>
+<li class="flex gap-2"><span class="text-blue-400">·</span>Muros de segurança</li>
+<li class="flex gap-2"><span class="text-blue-400">·</span>Ferramentas e integrações</li>
+</ul>
+<span class="inline-flex items-center gap-1 mt-5 text-blue-400 font-semibold text-sm group-hover:gap-2 transition-all">Abrir o Dia 2 <span aria-hidden="true">→</span></span>
+</a>
+<!-- Dia 3 -->
+<a class="group bg-gradient-to-br from-purple-900/30 to-dark-800 rounded-2xl border border-purple-500/30 p-6 transition-all hover:border-purple-500/60" href="curso/trilha3/index.html">
+<div class="flex items-center justify-between mb-3">
+<span class="inline-block px-3 py-1 bg-purple-500/20 text-purple-400 text-xs font-semibold rounded-full">DIA 3</span>
+<span class="text-xs text-neutral-500">6 módulos · 36 seções</span>
+</div>
+<h3 class="text-xl font-bold mb-2 group-hover:text-purple-400 transition-colors">🎯 Solução Real na Empresa</h3>
+<p class="text-sm text-neutral-400 mb-4">Do conceito ao protótipo: escolher um problema, definir a intenção, montar o fluxo, medir o resultado e apresentar a solução.</p>
+<ul class="space-y-1.5 text-sm text-neutral-300">
+<li class="flex gap-2"><span class="text-purple-400">·</span>A intenção no centro</li>
+<li class="flex gap-2"><span class="text-purple-400">·</span>Mapear o problema na empresa</li>
+<li class="flex gap-2"><span class="text-purple-400">·</span>Desenhar a arquitetura da solução</li>
+<li class="flex gap-2"><span class="text-purple-400">·</span>Protótipo funcional e medição</li>
+<li class="flex gap-2"><span class="text-purple-400">·</span>Evolução e apresentação</li>
+</ul>
+<span class="inline-flex items-center gap-1 mt-5 text-purple-400 font-semibold text-sm group-hover:gap-2 transition-all">Abrir o Dia 3 <span aria-hidden="true">→</span></span>
+</a>
+</div>
+</section>
+<!-- ===================== PARA QUEM / O QUE SAI SABENDO ===================== -->
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-b border-dark-600">
+<div class="grid md:grid-cols-2 gap-8">
+<div>
+<h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span>🧭</span> Para quem é</h2>
+<p class="text-neutral-400 mb-4 text-sm leading-relaxed">Pessoas comuns dentro das empresas que querem construir soluções com IA — sem virar programadores tradicionais nem competir com engenheiros de software.</p>
+<p class="text-neutral-300 text-sm leading-relaxed">O arquiteto de intenção olha para uma empresa e pergunta: onde há repetição? Onde se perde tempo? Onde a informação está desorganizada? Onde a decisão é lenta? <strong class="text-neutral-100">Onde a IA pode multiplicar resultado?</strong></p>
+</div>
+<div>
+<h2 class="text-xl font-bold mb-4 flex items-center gap-2"><span>✅</span> O que você sai sabendo fazer</h2>
+<ul class="grid sm:grid-cols-2 gap-2.5 text-sm text-neutral-300">
+<li class="flex gap-2"><span class="text-emerald-400">✓</span>Entender um problema real</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span>Mapear uma intenção</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span>Estruturar contexto</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span>Criar a alma de um Jarvis</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span>Definir canais de I/O</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span>Organizar agentes e serviços</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span>Escolher ferramentas</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span>Criar regras de segurança</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span>Medir resultado</li>
+<li class="flex gap-2"><span class="text-emerald-400">✓</span>Melhorar continuamente</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- ===================== PROMESSA / FECHO ===================== -->
+<section class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+<div class="bg-gradient-to-br from-emerald-900/30 via-dark-800 to-dark-800 rounded-2xl border border-emerald-500/30 p-8 sm:p-10 text-center">
+<h2 class="text-2xl sm:text-3xl font-bold mb-4">O futuro não pertence a quem sabe pedir melhor.</h2>
+<p class="text-lg text-neutral-300 mb-2">Pertence a quem sabe <strong class="text-emerald-400">estruturar melhor</strong>.</p>
+<p class="text-neutral-400 max-w-2xl mx-auto mb-8 text-sm">Prompt não basta. Ferramenta não basta. Agente não basta. O que faz a diferença é a arquitetura — e no centro da arquitetura está a intenção.</p>
+<div class="flex flex-wrap justify-center gap-3">
+<a class="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg font-semibold transition-colors" href="curso/trilha1/index.html">Começar agora pelo Dia 1 <span aria-hidden="true">→</span></a>
+</div>
+</div>
+</section>
+</main>
+<footer class="border-t border-dark-600 py-8">
+<div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-neutral-500 text-sm">
+<p><strong class="text-neutral-300">Arquitetura de Intenção da IA</strong> — Método JARVIS · curso presencial de 3 dias</p>
+<p class="mt-1">INEMA.CLUB · 2026 · seu progresso fica salvo só neste navegador</p>
+</div>
+</footer>
+<!-- learn.js + init -->
+<script src="./assets/learn.js"></script>
+<script>
     if (window.INEMA && typeof window.INEMA.init === 'function') { window.INEMA.init(); }
   </script>
 </body>
